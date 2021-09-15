@@ -4,5 +4,9 @@ body {
 
 .monster-image {
     width: 100vw;
-    height: 100vh;
+    max-height: 100vh;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
