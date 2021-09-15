@@ -1,1 +1,3 @@
-# DET-TBYL
+# Counter for Babies
+### Team: Titus, Xiaobai, Yiying, Luna
+This is the codebase ot the **COunter for Babies** project. First, gaze tracking is done and send to Flask server, where SVG images are rendered.
