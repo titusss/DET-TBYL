@@ -1,12 +1,220 @@
-body {
-    background-color: #E8CE58;
+:root {
+    --primary-color: #E8CE58;
 }
 
-.monster-image {
+body {
+    background-color: var(--primary-color);
+    overflow: hidden;
+    filter: hue-rotate(0deg);
+    transition: filter .8s ease;
+}
+
+.monster-parent  {
+    height: 100vh;
+    background-color: var(--primary-color);
+}
+
+#teeth, #mouth, #eyes, #pupils, #eyelid-right, #eyelid-left, #highlight {
     width: 100vw;
-    max-height: 100vh;
+    /* max-height: 100vh; */
     position: absolute;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+#eyelid-right, #eyelid-left {
+    margin-top: -5.4vw;
+    height: 0%;
+}
+
+#highlight {
+    mix-blend-mode: soft-light;
+}
+
+#pupils {
+    animation: blink 1s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        height: 56.25vw;
+    }
+    5% {
+        height: 0.0vw;
+    }
+    8% {
+        height: 0.0vw;
+    }
+    13% {
+        height: 56.25vw;
+    }
+}
+
+@keyframes sleeping_mouth {
+    0% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
+    50% {
+        transform: translateY(-38.25%) scaleY(.57);
+    }
+    75% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
+}
+
+@keyframes sad_mouth {
+    0% {
+        transform: translateY(-35%) scaleY(-.3);
+    }
+    50% {
+        transform: translateY(-36%) scaleY(-.4);
+    }
+    75% {
+        transform: translateY(-35%) scaleY(-.3);
+    }
+}
+
+
+@keyframes laughing_eyelids {
+    10% {
+        height: 0vw; margin-top: 9vw;
+    }
+    20% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    25% {
+        margin-top: -0.5vw;
+        height: 40vw;
+    }
+    30% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    35% {
+        margin-top: -0.5vw;
+        height: 40vw;
+    }
+    40% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    45% {
+        margin-top: -0.5vw;
+        height: 40vw;
+    }
+    50% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    55% {
+        margin-top: -0.5vw;
+        height: 40vw;
+    }
+    60% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    65% {
+        margin-top: -0.5vw;
+        height: 40vw;
+    }
+    70% {
+        margin-top: -2.2vw;
+        height: 40vw;
+    }
+    80% {
+        height: 0vw; margin-top: 9vw;
+    }
+    100% {
+        height: 0vw; margin-top: 9vw;
+    }
+}
+
+.mouth-neutral {
+    transform: translateY(-37.65%) scaleY(.5) !important;
+    animation: sleeping_mouth 4s cubic-bezier(0.42, 0, 0.26, 1.93) 2s infinite !important;
+}
+
+.mouth-sad {
+    transform: translateY(-35%) scaleY(-.3) !important;
+    animation: sad_mouth 4s cubic-bezier(0.42, 0, 0.26, 1.93) 2s infinite !important;
+}
+
+.mouth-laughing {
+    transform: translateY(-37.65%) scaleY(.5) !important;
+    animation: laughing_mouth 3s ease-in-out infinite !important;
+}
+
+.eyelid-laughing {
+    animation: laughing_eyelids 3s ease-in-out infinite !important;
+}
+
+.eyelid-right-sad {
+    transform: translate(5%, -85%) !important;
+    height: 100% !important;
+}
+
+.eyelid-left-sad {
+    transform: translate(-5%, -85%) !important;
+    height: 100% !important;
+}
+
+.eyelid-sleepy {
+    transform: translateY(-66%) scale(1.1) !important;
+    height: 100% !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: initial !important;
+}
+
+
+@keyframes laughing_mouth {
+    10% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
+    20% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    25% {
+        transform: translateY(-37.65%) scaleY(.8);
+    }
+    30% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    35% {
+        transform: translateY(-37.65%) scaleY(.8);
+    }
+    40% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    45% {
+        transform: translateY(-37.65%) scaleY(.8);
+    }
+    50% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    55% {
+        transform: translateY(-37.65%) scaleY(.8);
+    }
+    60% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    65% {
+        transform: translateY(-37.65%) scaleY(.8);
+    }
+    70% {
+        transform: translateY(-37.65%) scaleY(1);
+    }
+    80% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
+    100% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
 }
