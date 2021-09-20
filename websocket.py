@@ -1,5 +1,4 @@
 import asyncio
-import random
 import websockets
 from random import randrange
 import socket
@@ -11,6 +10,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
 async def time(websocket, path):
+    i = 0
     while True:
         moods = ['sad', 'happy', 'sleepy', 'neutral']
         mood = moods[randrange(4)]
