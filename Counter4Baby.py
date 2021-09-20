@@ -24,6 +24,23 @@ p = subprocess.Popen([sys.executable, 'websocket.py'],
                                     stdout=subprocess.PIPE, 
                                     stderr=subprocess.STDOUT)
 
+def translator(str):
+    if str == 'VERY_UNLIKELY':
+        str = 0
+    elif str == 'UNLIKELY':
+        str = 1
+    elif str == 'POSSIBLE':
+        str = 2
+    elif str == 'LIKELY':
+        str = 3
+    elif str == 'VERY_LIKELY':
+        str = 4
+    elif str == 'N':
+        str = -2
+    else:
+        str = -1
+    return str
+
 while True:
     # print(time.time())
     _, frame = webcam.read()
@@ -91,8 +108,12 @@ while True:
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
 
-    # Making the comm thing
-    text2 = str(horizontalRatio)+ ";"+str(verticallRatio)+ ";"+anger_likelihood+ ";"+joy_likelihood+ ";"+surprise_likelihood+ ";"+sorrow_likelihood
+    dic = {"happy":translator(joy_likelihood),"sad":translator(sorrow_likelihood), "sleepy":translator(anger_likelihood)}
+    max_key = max(dic, key=dic.get)
+
+    print(max_key)
+
+    text2 = str(horizontalRatio)+ ";"+str(verticallRatio)+ ";"+max_key
     print(text2)
     MESSAGE = text2.encode()
     sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))

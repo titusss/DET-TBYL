@@ -4,12 +4,14 @@ const body = document.body;
 const pupils = document.getElementById('pupils');
 
 // Set eye blinking.
-window.addEventListener('mousemove', (evt) => {
-    const x = (evt.pageX - (window.innerWidth / 2)) / 110;
-    const y = 50 + (evt.pageY - (window.innerHeight / 2)) / 35;
-    pupils.style.top = `${y}%`
-    pupils.style.left = `${x}%`;
-});
+// window.addEventListener('mousemove', (evt) => {
+//     const x = (evt.pageX - (window.innerWidth / 2)) / 110;
+//     const y = 50 + (evt.pageY - (window.innerHeight / 2)) / 35;
+//     pupils.style.top = `${y}%`
+//     pupils.style.left = `${x}%`;
+
+//     console.log(x,"     ",y)
+// });
 
 // Function for adding and removing CSS classes for setting emotion.
 function updateCssClass(targetID, newCssClass) {
@@ -22,6 +24,19 @@ function updateCssClass(targetID, newCssClass) {
 
 function setEmotion() {
     // Main program for deciding which emotion to set.
+    const message = emotion.split(";");
+    const message_x = message[0]
+    const message_y = message[1]
+    const message_emotion = message[2]
+    const x = -(message_x-0.5)*20
+    const y = (message_y-0.5)*20 + 50;
+    console.log(x,"     ",y)
+
+    pupils.style.top = `${y}%`
+    pupils.style.left = `${x}%`;
+
+    emotion = message_emotion
+
     switch(emotion) {
         case 'happy':
             console.log('Emotion: Happy')
