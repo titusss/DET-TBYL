@@ -16,7 +16,6 @@ function updateCssClass(targetID, newCssClass) {
     const element = document.getElementById(targetID);
     element.className = ''; //remove all css styles
     if(newCssClass) {
-        console.log(newCssClass);
         element.classList.add(newCssClass)
     }
 }
@@ -59,21 +58,19 @@ function setEmotion() {
     }
 }
 
+
 setEmotion();
-var dgram = require('dgram');
-var port = 5005;
+// Create WebSocket connection.
+const socket = new WebSocket('ws://localhost:5678');
 
-socket = dgram.createSocket('udp4');
+// Connection opened
+socket.addEventListener('open', function (event) {
+    socket.send('Hello Server!');
+});
 
-socket.on('message', function (msg, info){
-    emotion = msg.toString();
-    console.log(emotion);
+// Listen for messages
+socket.addEventListener('message', function (event) {
+    console.log('Message from server ', event.data);
+    emotion = event.data;
     setEmotion();
 });
-
-socket.on('listening', function(){
-    var address = socket.address();
-    console.log("listening on :" + address.address + ":" + address.port);
-});
-
-socket.bind(port);

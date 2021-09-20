@@ -25,6 +25,7 @@ body {
 #eyelid-right, #eyelid-left {
     margin-top: -5.4vw;
     height: 0%;
+    transition: transform 1.5s ease, opacity 2s cubic-bezier(1, 0, 1, 1);
 }
 
 #highlight {
@@ -33,6 +34,7 @@ body {
 
 #pupils {
     animation: blink 1s ease-in-out infinite alternate;
+    transition: opacity 1s ease;
 }
 
 @keyframes blink {
@@ -166,11 +168,11 @@ body {
 }
 
 .hide {
-    display: none !important;
+    opacity: 0 !important;
 }
 
 .show {
-    display: initial !important;
+    opacity: 1 !important;
 }
 
 
