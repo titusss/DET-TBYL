@@ -7,6 +7,8 @@ from gaze_tracking import GazeTracking
 import io
 import time
 import socket
+import subprocess
+import sys
 
 os.system('cls||clear')
 
@@ -17,6 +19,10 @@ webcam = cv2.VideoCapture(0)
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+
+p = subprocess.Popen([sys.executable, 'websocket.py'], 
+                                    stdout=subprocess.PIPE, 
+                                    stderr=subprocess.STDOUT)
 
 while True:
     # print(time.time())
