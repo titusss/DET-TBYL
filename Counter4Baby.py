@@ -1,5 +1,5 @@
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/Users/xiaobaiji/Desktop/gcp.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/pi/gcp.json"
 from google.cloud import vision
 
 import cv2
@@ -42,7 +42,7 @@ def translator(str):
     return str
 
 while True:
-    # print(time.time())
+    print(time.time())
     _, frame = webcam.read()
     gaze.refresh(frame)
     client = vision.ImageAnnotatorClient()
@@ -65,8 +65,8 @@ while True:
         horizontalRatio = -1
         verticallRatio = -1
 
-    cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
-    cv2.imshow("Demo", new_frame)
+    # cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
+    # cv2.imshow("Demo", new_frame)
     # print(text)
 
     image_bytes = cv2.imencode('.jpg', frame)[1].tobytes()
@@ -83,12 +83,15 @@ while True:
     joy_likelihood = "N"
     surprise_likelihood = "N"
     sorrow_likelihood = "N"
+    
+    detected = False
+    max_key = "sleepy"
 
     for face in faces:
-        # print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
-        # print('joy: {}'.format(likelihood_name[face.joy_likelihood]))
-        # print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
-        # print('sorrow: {}'.format(likelihood_name[face.sorrow_likelihood]))
+        print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
+        print('joy: {}'.format(likelihood_name[face.joy_likelihood]))
+        print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
+        print('sorrow: {}'.format(likelihood_name[face.sorrow_likelihood]))
         # print('blurred: {}'.format(likelihood_name[face.blurred_likelihood]))
         # print('headwear: {}'.format(likelihood_name[face.headwear_likelihood]))
 
@@ -96,6 +99,8 @@ while True:
         joy_likelihood = likelihood_name[face.joy_likelihood]
         surprise_likelihood = likelihood_name[face.surprise_likelihood]
         sorrow_likelihood = likelihood_name[face.sorrow_likelihood]
+        
+        detected = True
 
         # vertices = (['({},{})'.format(vertex.x, vertex.y)
         #             for vertex in face.bounding_poly.vertices])
@@ -110,20 +115,24 @@ while True:
 
     dic = {"happy":translator(joy_likelihood),"sad":translator(sorrow_likelihood), "sleepy":translator(anger_likelihood)}
 
-    if joy_likelihood=='VERY_UNLIKELY' && sorrow_likelihood=='VERY_UNLIKELY' && anger_likelihood'VERY_UNLIKELY':
+    if translator(joy_likelihood)<1 and translator(sorrow_likelihood)<1 and translator(anger_likelihood)<1 and detected==True:
         max_key = "neutral"
-    else:
+    elif detected == True:
         max_key = max(dic, key=dic.get)
 
-    print(max_key)
-
+    # print(max_key)
+    detected = False
+    
+    if horizontalRatio == None:
+        max_key = "neutral"
+    
     text2 = str(horizontalRatio)+ ";"+str(verticallRatio)+ ";"+max_key
     print(text2)
     MESSAGE = text2.encode()
     sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
 
     #Recording time to manage performance
-    # print(time.time())
+    print(time.time())
 
     if cv2.waitKey(1) == 27:
         break
