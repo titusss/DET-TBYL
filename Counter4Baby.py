@@ -109,7 +109,11 @@ while True:
                 response.error.message))
 
     dic = {"happy":translator(joy_likelihood),"sad":translator(sorrow_likelihood), "sleepy":translator(anger_likelihood)}
-    max_key = max(dic, key=dic.get)
+
+    if joy_likelihood=='VERY_UNLIKELY' && sorrow_likelihood=='VERY_UNLIKELY' && anger_likelihood'VERY_UNLIKELY':
+        max_key = "neutral"
+    else:
+        max_key = max(dic, key=dic.get)
 
     print(max_key)
 
