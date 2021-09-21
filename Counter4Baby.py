@@ -25,7 +25,9 @@ p = subprocess.Popen([sys.executable, 'websocket.py'],
                                     stderr=subprocess.STDOUT)
 
 os.system('pkill -f chromium-browser')
-os.system('chromium-browser --start-fullscreen /home/pi/DET-TBYL/Frontend/index.html')
+p = subprocess.Popen([sys.executable, 'chrome.py'], 
+                                    stdout=subprocess.PIPE, 
+                                    stderr=subprocess.STDOUT)
 
 def translator(str):
     if str == 'VERY_UNLIKELY':
