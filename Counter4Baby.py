@@ -65,6 +65,10 @@ while True:
         horizontalRatio = -1
         verticallRatio = -1
 
+    if horizontalRatio == None and verticallRatio == None:
+        horizontalRatio = 0.5
+        verticallRatio = 0.5
+
     # cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
     # cv2.imshow("Demo", new_frame)
     print(text)
@@ -115,16 +119,16 @@ while True:
 
     dic = {"happy":translator(joy_likelihood),"sad":translator(sorrow_likelihood), "sleepy":translator(anger_likelihood)}
 
-    if translator(joy_likelihood)<1 and translator(sorrow_likelihood)<1 and translator(anger_likelihood)<1 and detected==False:
+    if detected==False:
+        max_key = "sleepy"
+    elif translator(joy_likelihood)<1 and translator(sorrow_likelihood)<1 and translator(anger_likelihood)<1:
         max_key = "neutral"
-    elif detected == True:
+    else:
         max_key = max(dic, key=dic.get)
 
     # print(max_key)
     detected = False
     
-    if horizontalRatio == None:
-        max_key = "neutral"
     
     text2 = str(horizontalRatio)+ ";"+str(verticallRatio)+ ";"+max_key
     print(text2)
