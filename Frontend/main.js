@@ -1,5 +1,6 @@
 
 var emotion = 'neutral';
+var _lastEmotion = '';
 const body = document.body;
 const pupils = document.getElementById('pupils');
 
@@ -25,17 +26,21 @@ function updateCssClass(targetID, newCssClass) {
 function setEmotion() {
     // Main program for deciding which emotion to set.
     const message = emotion.split(";");
-    const message_x = message[0]
-    const message_y = message[1]
+    var message_x = message[0]
+    var message_y = message[1]
     const message_emotion = message[2]
-    const x = -(message_x-0.5)*20
-    const y = (message_y-0.5)*20 + 50;
+    
+    // const x = (evt.pageX - (window.innerWidth / 2)) / 110;
+    // const y = 50 + (evt.pageY - (window.innerHeight / 2)) / 35;
+    
+    const x = (message_x - 0.5) * window.innerWidth * 0.13;
+    const y = (message_y - 0.5) * window.innerWidth * 0.16;
     console.log(x,"     ",y)
 
-    pupils.style.top = `${y}%`
-    pupils.style.left = `${x}%`;
+    pupils.style.top = `${y + window.innerHeight / 2}px`
+    pupils.style.left = `${x}px`;
 
-    emotion = message_emotion
+    // emotion = message_emotion
 
     switch(emotion) {
         case 'happy':
@@ -87,5 +92,8 @@ socket.addEventListener('open', function (event) {
 socket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
     emotion = event.data;
-    setEmotion();
+    if (emotion != _lastEmotion) {
+        setEmotion();
+        _lastEmotion = emotion;
+    }
 });
