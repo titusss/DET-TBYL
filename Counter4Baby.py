@@ -1,5 +1,5 @@
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/Users/xiaobaiji/Desktop/gcp.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/pi/gcp.json"
 from google.cloud import vision
 
 import cv2
