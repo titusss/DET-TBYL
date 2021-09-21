@@ -1,5 +1,5 @@
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/pi/gcp.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/Users/xiaobaiji/Desktop/gcp.json"
 from google.cloud import vision
 
 import cv2
@@ -65,9 +65,9 @@ while True:
         horizontalRatio = -1
         verticallRatio = -1
 
-    # cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
-    # cv2.imshow("Demo", new_frame)
-    # print(text)
+    cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
+    cv2.imshow("Demo", new_frame)
+    print(text)
 
     image_bytes = cv2.imencode('.jpg', frame)[1].tobytes()
 
@@ -115,7 +115,7 @@ while True:
 
     dic = {"happy":translator(joy_likelihood),"sad":translator(sorrow_likelihood), "sleepy":translator(anger_likelihood)}
 
-    if translator(joy_likelihood)<1 and translator(sorrow_likelihood)<1 and translator(anger_likelihood)<1 and detected==True:
+    if translator(joy_likelihood)<1 and translator(sorrow_likelihood)<1 and translator(anger_likelihood)<1 and detected==False:
         max_key = "neutral"
     elif detected == True:
         max_key = max(dic, key=dic.get)
