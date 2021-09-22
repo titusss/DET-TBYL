@@ -1,5 +1,5 @@
 
-var emotion = 'neutral';
+var emotion = 'sleepy';
 var _lastEmotion = '';
 const body = document.body;
 const pupils = document.getElementById('pupils');
@@ -40,7 +40,7 @@ function setEmotion() {
     pupils.style.top = `${y + window.innerHeight / 2}px`
     pupils.style.left = `${x}px`;
 
-    // emotion = message_emotion
+    emotion = message_emotion
 
     switch(emotion) {
         case 'happy':
