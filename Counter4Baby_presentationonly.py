@@ -47,23 +47,23 @@ def translator(str):
     return str
 
 while True: 
-    time.sleep(2)
-    
+    time.sleep(10)
+
     text2 = str(0.5)+ ";"+str(0.5)+ ";"+"sleepy"
     print(text2)
     MESSAGE = text2.encode()
     sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
-    time.sleep(2)
+    time.sleep(10)
 
     text2 = str(0.5)+ ";"+str(0.5)+ ";"+"happy"
     print(text2)
     MESSAGE = text2.encode()
     sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
-    time.sleep(2)
+    time.sleep(10)
 
     text2 = str(0.5)+ ";"+str(0.5)+ ";"+"sad"
     print(text2)
     MESSAGE = text2.encode()
     sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
-    time.sleep(2)
+    time.sleep(10)
 
