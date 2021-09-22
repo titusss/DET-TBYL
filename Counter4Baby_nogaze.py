@@ -53,7 +53,6 @@ while True:
 
     # cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
     # cv2.imshow("Demo", new_frame)
-    print(text)
 
     image_bytes = cv2.imencode('.jpg', frame)[1].tobytes()
 
