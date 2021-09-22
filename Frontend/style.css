@@ -14,7 +14,15 @@ body {
     background-color: var(--primary-color);
 }
 
-#teeth, #mouth, #eyes, #pupils, #eyelid-right, #eyelid-left, #highlight {
+.monster-parent>img  {
+    width: 100vw;
+    /* max-height: 100vh; */
+    position: absolute;
+    top: 50%;
+}
+
+
+#teeth, #eyes, #mouth, #pupils, #eyelid-right, #eyelid-left, #highlight {
     width: 100vw;
     /* max-height: 100vh; */
     position: absolute;
@@ -22,6 +30,7 @@ body {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
 #eyelid-right, #eyelid-left {
     margin-top: -5.4vw;
     height: 0%;
@@ -62,6 +71,9 @@ body {
     75% {
         transform: translateY(-37.65%) scaleY(.5);
     }
+    100% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
 }
 
 @keyframes sad_mouth {
@@ -72,6 +84,9 @@ body {
         transform: translateY(-36%) scaleY(-.4);
     }
     75% {
+        transform: translateY(-35%) scaleY(-.3);
+    }
+    100% {
         transform: translateY(-35%) scaleY(-.3);
     }
 }
@@ -134,17 +149,17 @@ body {
 }
 
 .mouth-neutral {
-    transform: translateY(-37.65%) scaleY(.5) !important;
-    animation: sleeping_mouth 4s cubic-bezier(0.42, 0, 0.26, 1.93) 2s infinite !important;
+    /* transform: translateY(-37.65%) scaleY(.5) !important; */
+    animation: sleeping_mouth 5s cubic-bezier(0.42, 0, 0.26, 1.93) infinite !important;
 }
 
 .mouth-sad {
-    transform: translateY(-35%) scaleY(-.3) !important;
-    animation: sad_mouth 4s cubic-bezier(0.42, 0, 0.26, 1.93) 2s infinite !important;
+    /* transform: translateY(-35%) scaleY(-.3) !important; */
+    animation: sad_mouth 5s cubic-bezier(0.42, 0, 0.26, 1.93) 2s infinite !important;
 }
 
 .mouth-laughing {
-    transform: translateY(-37.65%) scaleY(.5) !important;
+    /* transform: translateY(-37.65%) scaleY(.5) !important; */
     animation: laughing_mouth 3s ease-in-out infinite !important;
 }
 
@@ -177,6 +192,9 @@ body {
 
 
 @keyframes laughing_mouth {
+    0% {
+        transform: translateY(-37.65%) scaleY(.5);
+    }
     10% {
         transform: translateY(-37.65%) scaleY(.5);
     }
